@@ -51,6 +51,8 @@ dependencies {
     api rootProject.ext.libs.rxjava
     api rootProject.ext.libs.annotations
     implementation rootProject.ext.libs.rxrelay
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'javax.inject:javax.inject:1'
     implementation project(path: ':dagger-library-shadow', transitive: false, configuration: 'shadow')
     annotationProcessor project(path: ':dagger-compiler-shadow', transitive: false, configuration: 'shadow')
 
