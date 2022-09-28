@@ -19,6 +19,7 @@ import com.polidea.rxandroidble.internal.scan.RxBleInternalScanResult;
 import com.polidea.rxandroidble.internal.scan.ScanPreconditionsVerifier;
 import com.polidea.rxandroidble.internal.scan.ScanPreconditionsVerifierApi18;
 import com.polidea.rxandroidble.internal.scan.ScanPreconditionsVerifierApi24;
+import com.polidea.rxandroidble.internal.scan.ScanPreconditionsVerifierApi31;
 import com.polidea.rxandroidble.internal.scan.ScanSetupBuilder;
 import com.polidea.rxandroidble.internal.scan.ScanSetupBuilderImplApi18;
 import com.polidea.rxandroidble.internal.scan.ScanSetupBuilderImplApi21;
@@ -276,12 +277,15 @@ public interface ClientComponent {
         static ScanPreconditionsVerifier provideScanPreconditionVerifier(
                 @Named(PlatformConstants.INT_DEVICE_SDK) int deviceSdk,
                 Provider<ScanPreconditionsVerifierApi18> scanPreconditionVerifierForApi18,
-                Provider<ScanPreconditionsVerifierApi24> scanPreconditionVerifierForApi24
+                Provider<ScanPreconditionsVerifierApi24> scanPreconditionVerifierForApi24,
+                Provider<ScanPreconditionsVerifierApi31> scanPreconditionVerifierForApi31
         ) {
             if (deviceSdk < Build.VERSION_CODES.N) {
                 return scanPreconditionVerifierForApi18.get();
-            } else {
+            } else if (deviceSdk < 31) {
                 return scanPreconditionVerifierForApi24.get();
+            } else {
+                return scanPreconditionVerifierForApi31.get();
             }
         }
     }
