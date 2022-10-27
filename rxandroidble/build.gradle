@@ -9,7 +9,7 @@ android {
         minSdkVersion 18
         targetSdkVersion 27
         versionCode 1
-        versionName VERSION_NAME
+        versionName LIBRARY_VERSION
     }
 
     buildTypes {
@@ -38,8 +38,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
-    preBuild.dependsOn 'checkstyle'
 }
 
 androidGroovy {
